@@ -2,10 +2,9 @@ import streamlit as st
 from assets.styles.css import styles
 from views.messages import AUTHORS, CYBORG, INTRO, SIDE_INFO, TITLE
 
-
 def app():
     st.set_page_config(
-        page_title="Hate Guard - Advanced AI Anti-hate",
+        page_title="Hate Guard - Advanced AI anti-hate",
         page_icon="🛡️",
         layout="centered",
         initial_sidebar_state="collapsed",
