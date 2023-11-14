@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Response, status
 from controllers import hate_predictor
+from fastapi import APIRouter, Response, status
 
-predictor = APIRouter(prefix="/predict",tags=["ML Predictor"])
+predictor = APIRouter(prefix="/predict", tags=["ML Predictor"])
+
 
 @predictor.get(
     "/message",
@@ -12,11 +13,22 @@ predictor = APIRouter(prefix="/predict",tags=["ML Predictor"])
 async def receive_message(response: Response):
     return await hate_predictor.receive_message(response)
 
+
 @predictor.post(
     "/message",
     summary="Recibimos y enviamos la respuesta de Hate Predictor",
-    response_description="Muestra lo que sea",
+    response_description="Respuesta de Hate Predictor",
     status_code=status.HTTP_200_OK,
 )
-async def make_prediction(text: str, response:Response) -> bool:
+async def make_prediction(text: dict, response: Response):
     return await hate_predictor.make_prediction(text, response)
+
+
+@predictor.post(
+    "/mood",
+    summary="Recibimos y enviamos la respuesta de Hate Predictor",
+    response_description="Respuesta de Hate Predictor",
+    status_code=status.HTTP_200_OK,
+)
+async def make_mood_prediction(text: dict, response: Response):
+    return await hate_predictor.make_mood_prediction(text, response)
