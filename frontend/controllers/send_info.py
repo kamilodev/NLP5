@@ -1,15 +1,20 @@
+import os
+
 import pandas as pd
 import requests
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()
+
+URL = os.getenv("URL")
 
 
 def send_text(topic):
     if topic:
         payload = {"topic": topic}
         try:
-            response = requests.post(
-                "http://localhost:8000/predict/message?text", json=payload
-            )
+            response = requests.post(f"{URL}/predict/message?text", json=payload)
             if response.status_code == 200:
                 result = response.json()
                 dataset = pd.DataFrame(result)
@@ -30,7 +35,7 @@ def send_text_area(mood):
         payload = {"mood": mood}
 
         try:
-            response = requests.post("http://localhost:8000/predict/mood", json=payload)
+            response = requests.post(f"{URL}/predict/mood", json=payload)
             if response.status_code == 200:
                 result = response.json().get("message")
                 mood = payload["mood"]
