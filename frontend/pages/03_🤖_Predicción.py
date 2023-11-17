@@ -21,7 +21,8 @@ def prediction():
     if st.button(label="Predecir", type="primary"):
         if topic:
             if base_url in topic:
-                send_text(topic)
+                with st.spinner("Prediciendo, espera unos segundos...  ⏳"):
+                    send_text(topic)
             else:
                 st.error("Introduce una URL válida de YouTube")
         if mood:
