@@ -3,11 +3,14 @@ import os
 import pandas as pd
 import requests
 import streamlit as st
-from dotenv import load_dotenv
 
-load_dotenv()
+# If you are using a local backend, uncomment the following lines:
+# from dotenv import load_dotenv
+# load_dotenv()
+# URL = os.getenv("URL")
 
-URL = os.getenv("URL")
+# If you want to deploy your backend in streamlit sharing, uncomment the following lines:
+URL = os.environ["URL"]
 
 
 def send_text(topic):
