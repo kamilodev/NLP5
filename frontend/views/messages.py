@@ -1,9 +1,9 @@
 import os
 
-TITLE = "Hate Guard"
+TITLE = "Hate Guardian"
 
 INTRO = """
-    Bienvenido a Hate Guard, una herramienta impulsada por inteligencia artificial para detectar y combatir el discurso de odio en línea. Nuestra misión es fomentar un ambiente digital inclusivo y amigable para todos.
+    Bienvenido a Hate Guardian, una herramienta impulsada por inteligencia artificial para detectar y combatir el discurso de odio en línea. Nuestra misión es fomentar un ambiente digital inclusivo y amigable para todos.
     """
 
 CYBORG = os.path.join(os.path.dirname(__file__), "../assets/images/guardian.png")
