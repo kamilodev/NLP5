@@ -12,7 +12,7 @@ def prediction():
 
     st.markdown("Escribe a continuación el ID del comentario que deseas predecir")
 
-    topic = st.text_input(label="Comentario de YouTube", placeholder="ID")
+    topic = st.text_input(label="URL de YouTube", placeholder="ID")
     mood = st.text_area(
         label="Comentario de texto",
         placeholder="Escribe aquí",
