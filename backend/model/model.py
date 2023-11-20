@@ -20,6 +20,7 @@ def clean_text(text):
     return text
 
 # Load the dataset
+
 data = pd.read_csv('youtoxic_english.csv')
 data['CleanedText'] = data['Text'].apply(clean_text)
 data_cleaned = data.drop_duplicates(subset=['Text'], keep='first').reset_index(drop=True)
