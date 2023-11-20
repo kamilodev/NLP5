@@ -5,8 +5,6 @@ def process_replies(comment):
         replies.append(
             [
                 reply.get("authorDisplayName"),
-                reply.get("publishedAt"),
-                reply.get("likeCount"),
                 reply.get("textOriginal"),
             ]
         )
