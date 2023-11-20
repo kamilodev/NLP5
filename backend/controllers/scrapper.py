@@ -5,10 +5,12 @@ import pandas as pd
 from dotenv import load_dotenv
 from fastapi import Response, status
 from googleapiclient.errors import HttpError
+from model.model import predict_toxicity, load_model
 
 from . import process_comments
 
 load_dotenv()
+model = load_model()
 DEV_KEY = os.getenv("DEV")
 
 
@@ -45,8 +47,19 @@ def scrapper_video(video_Id, fastapi_response: Response):
 
         df = pd.DataFrame(
             all_comments,
-            columns=["Autor", "Fecha", "Likes", "Comentario"],
+            columns=["Autor", "Comentario"],
         )
+
+        comments = df["Comentario"]
+        for comment in comments:
+            prediction = predict_toxicity(model, comment)
+            if prediction == 1:
+                df["Toxicidad"] = "Tóxico"
+            else:
+                df["Toxicidad"] = "No tóxico"
+
+        # Elimina la columna de indices del dataframe
+        df.reset_index(drop=True, inplace=True)
         fastapi_response.status_code = status.HTTP_200_OK
         return df
 
