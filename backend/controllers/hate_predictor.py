@@ -1,6 +1,6 @@
 from fastapi import Response, status
 from pydantic import BaseModel
-from model.model import predict_toxicity, load_model
+from model.model_predict import predict_toxicity, load_model
 
 from . import scrapper
 

@@ -5,7 +5,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from fastapi import Response, status
 from googleapiclient.errors import HttpError
-from model.model import predict_toxicity, load_model
+from model.model_predict import predict_toxicity, load_model
 
 from . import process_comments
 
