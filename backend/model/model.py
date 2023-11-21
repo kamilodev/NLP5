@@ -20,7 +20,8 @@ def clean_text(text):
     return text
 
 # Load the dataset
-data = pd.read_csv('youtoxic_english_1000.csv')
+
+data = pd.read_csv('youtoxic_english.csv')
 data['CleanedText'] = data['Text'].apply(clean_text)
 data_cleaned = data.drop_duplicates(subset=['Text'], keep='first').reset_index(drop=True)
 
@@ -84,4 +85,4 @@ overfitting_level = (train_results['accuracy'] - val_results['accuracy']) * 100
 print(f"This model has an overfitting of {overfitting_level:.2f}%")
 
 # Save the model
-model.save("model")
+model.save("BERT_model")
