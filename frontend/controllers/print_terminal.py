@@ -1,12 +1,15 @@
 import argparse
-import requests
+
 import pandas as pd
-import sys
+import requests
+
 
 def get_dataset_from_url(url):
     payload = {"topic": url}
     try:
-        response = requests.post("http://127.0.0.1:8000/predict/message?text", json=payload)
+        response = requests.post(
+            "http://127.0.0.1:8000/predict/message?text", json=payload
+        )
         if response.status_code == 200:
             result = response.json()
             return pd.DataFrame(result)
@@ -16,6 +19,7 @@ def get_dataset_from_url(url):
     except Exception as e:
         print(f"Error: {e}")
         return None
+
 
 def get_prediction_from_text(text):
     payload = {"mood": text}
@@ -31,10 +35,18 @@ def get_prediction_from_text(text):
     except Exception as e:
         print(f"Ocurrió un error: {e}")
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Get dataset from URL or text prediction")
+    parser = argparse.ArgumentParser(
+        description="Get dataset from URL or text prediction"
+    )
     parser.add_argument("input", help="URL or text to send for prediction")
-    parser.add_argument("--mode", choices=["url", "text"], default="url", help="Mode of operation (url or text)")
+    parser.add_argument(
+        "--mode",
+        choices=["url", "text"],
+        default="url",
+        help="Mode of operation (url or text)",
+    )
 
     args = parser.parse_args()
     input_data = args.input
@@ -48,10 +60,21 @@ def main():
     elif mode == "url":
         dataset = get_dataset_from_url(input_data)
         if dataset is not None:
+            toxic = dataset["Toxicidad"].values.tolist().count("👹 Tóxico")
+            no_toxic = dataset["Toxicidad"].values.tolist().count("😇 No tóxico")
+
             pd.set_option("display.max_rows", None)
             print(dataset)
+            print("\n")
+            print("*" * 80)
+            print("\n")
+            print(f"Numero de comentarios: {len(dataset)}")
+            print(f"Numero de comentarios tóxicos: {toxic}")
+            print(f"Numero de comentarios no tóxicos: {no_toxic}")
+            print("\n")
     else:
         print("Modo no válido. Use 'url' o 'text'.")
+
 
 if __name__ == "__main__":
     main()

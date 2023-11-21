@@ -31,11 +31,11 @@ def send_text(topic):
                 st.write("")
                 st.write(
                     "Numero de comentarios tóxicos: ",
-                    dataset["Toxicidad"].values.tolist().count("Tóxico"),
+                    dataset["Toxicidad"].values.tolist().count("👹 Tóxico"),
                 )
                 st.write(
                     "Numero de comentarios no tóxicos: ",
-                    dataset["Toxicidad"].values.tolist().count("No tóxico"),
+                    dataset["Toxicidad"].values.tolist().count("😇 No tóxico"),
                 )
             else:
                 st.error(response.json().get("message"))

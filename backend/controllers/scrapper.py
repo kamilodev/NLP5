@@ -53,16 +53,13 @@ def scrapper_video(video_Id, fastapi_response: Response):
 
         comments = df["Comentario"]
         comments = [translate_text(comment) for comment in comments]
-        for comment in comments:
-            print(comment)
-            prediction = predict_toxicity(model, comment)
-            print(f"Comment: {comment} - Prediction: {prediction}")
-            if prediction == 1:
-                df["Toxicidad"] = "Tóxico"
-            else:
-                df["Toxicidad"] = "No tóxico"
 
-        # Elimina la columna de indices del dataframe
+        df["Toxicidad"] = None
+
+        for i, comment in enumerate(comments):
+            prediction = predict_toxicity(model, comment)
+            df.at[i, "Toxicidad"] = "👹 Tóxico" if prediction == 1 else "😇 No tóxico"
+
         df.reset_index(drop=True, inplace=True)
         fastapi_response.status_code = status.HTTP_200_OK
         return df
