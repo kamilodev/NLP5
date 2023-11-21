@@ -2,10 +2,11 @@ import os
 
 import googleapiclient.discovery as discovery
 import pandas as pd
+from controllers.translate import translate_text
 from dotenv import load_dotenv
 from fastapi import Response, status
 from googleapiclient.errors import HttpError
-from model.model_predict import predict_toxicity, load_model
+from model.model_predict import load_model, predict_toxicity
 
 from . import process_comments
 
@@ -51,8 +52,11 @@ def scrapper_video(video_Id, fastapi_response: Response):
         )
 
         comments = df["Comentario"]
+        comments = [translate_text(comment) for comment in comments]
         for comment in comments:
+            print(comment)
             prediction = predict_toxicity(model, comment)
+            print(f"Comment: {comment} - Prediction: {prediction}")
             if prediction == 1:
                 df["Toxicidad"] = "Tóxico"
             else:
