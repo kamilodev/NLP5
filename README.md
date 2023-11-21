@@ -1,4 +1,4 @@
-# Hate Guardian
+# Welcome to Hate Guardian Project 👋
 
 Hate Guardian is an AI-powered hate speech detection tool. It allows users to analyze online comments and detect hate speech.
 
