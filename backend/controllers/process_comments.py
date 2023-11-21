@@ -9,8 +9,6 @@ def process_comments(response):
         comments.append(
             [
                 comment.get("authorDisplayName"),
-                comment.get("publishedAt"),
-                comment.get("likeCount"),
                 comment.get("textOriginal"),
             ]
         )

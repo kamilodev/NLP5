@@ -1,7 +1,10 @@
 from fastapi import Response, status
 from pydantic import BaseModel
+from model.model_predict import predict_toxicity, load_model
 
 from . import scrapper
+
+model = load_model()
 
 
 class Text(BaseModel):
@@ -37,7 +40,9 @@ async def make_mood_prediction(text, response: Response):
     Realizamos la predicción
     """
     try:
-        return {"message": f"El texto es: {text.get('mood')}"}
+        prediction = predict_toxicity(model, text.get("mood"))
+        predict_message = "👹 Es Tóxico" if prediction == 1 else "😇 No es tóxico"
+        return {"message": f"El mensaje {text.get('mood')}, {predict_message}"}
         response.status_code = status.HTTP_200_OK
 
     except Exception as error:
