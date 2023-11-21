@@ -1,5 +1,3 @@
-import os
-
 import pandas as pd
 import requests
 import streamlit as st
@@ -10,7 +8,7 @@ import streamlit as st
 # URL = os.getenv("URL")
 
 # If you want to deploy your backend in streamlit sharing, uncomment the following lines:
-URL = os.environ["URL"]
+# URL = os.environ["URL"]
 
 
 def send_text(topic):
