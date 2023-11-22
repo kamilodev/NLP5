@@ -15,3 +15,9 @@ AUTHORS = """
     """
 
 SIDE_INFO = "Puedes usar nuestro modelo de inteligencia artificial para detectar y combatir el discurso de odio en línea."
+
+FEATURES = """
+    👉 Analyze YouTube comments for a video\n
+    👉 Classify comments as hate speech or not using a DistilBERT model\n
+    👉 View analysis results in an interactive Streamlit dashboard
+    """
