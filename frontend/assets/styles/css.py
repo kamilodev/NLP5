@@ -88,8 +88,8 @@ h3 {
     text-align: center;
 }
 
-img {
-    width: 23%;
+.e115fcil1 > img {
+    width: 30%;
     position: fixed;
     z-index: 10;
     align-self: flex-end;
@@ -246,3 +246,4 @@ img {
 }
 </style>
 """
+
